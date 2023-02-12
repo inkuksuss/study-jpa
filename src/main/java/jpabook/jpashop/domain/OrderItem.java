@@ -2,6 +2,7 @@ package jpabook.jpashop.domain;
 
 import jakarta.persistence.*;
 import jpabook.jpashop.domain.item.Item;
+import jpabook.jpashop.exception.NotEnoughStockException;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -24,7 +25,9 @@ public class OrderItem {
     private int orderPrice;
     private int count;
 
-    public static OrderItem createOrderItem(Item item, int orderPrice, int count) {
+    protected OrderItem() {}
+
+    public static OrderItem createOrderItem(Item item, int orderPrice, int count) throws NotEnoughStockException {
         OrderItem orderItem = new OrderItem();
         orderItem.setItem(item);
         orderItem.setOrderPrice(orderPrice);

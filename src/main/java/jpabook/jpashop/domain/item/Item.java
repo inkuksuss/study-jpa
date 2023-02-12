@@ -13,7 +13,7 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "DTYPE")
 @Getter @Setter
-public abstract class Item {
+public class Item {
 
     @Id
     @GeneratedValue
@@ -31,7 +31,7 @@ public abstract class Item {
         this.stockQuantity += quantity;
     }
 
-    public void removeStock(int quantity) {
+    public void removeStock(int quantity) throws NotEnoughStockException {
         int restStock = this.stockQuantity - quantity;
         if (restStock < 0) throw new NotEnoughStockException("need more stock");
         this.stockQuantity = restStock;
